@@ -9,7 +9,7 @@ Consistency & Correctness
 - we use tests for both these things, but the solve different problems
 - consistency means we have confidence that what I see in one browser is the same in others. But it doesn't tell us whether it's correct or not.
 - correctness is a measure of how close we are to spec.
-
+- correctness is much more important but consistency is much easier to define & measure.
 
 Kinds of tests
 ----
