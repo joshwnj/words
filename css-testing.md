@@ -14,6 +14,8 @@ Consistency & Correctness
 Kinds of tests
 ----
 
+It doesn't seem like there is one kind of testing pattern that suits all stages of a project. So here we're trying to classify the different kinds of tests you might want to do and get an idea of how they can fit together.
+
 ### Detect changes
 
 - something changed visual appearance since the last time we ran the test.
@@ -39,3 +41,13 @@ Example Workflow
  - benefit of having non-screenshot tests here is that with screenshots you only get useful feedback when you're very near to complete and getting the final pixels in place.
 - cross-browser comparisons can be run during this whole process so that inconsistencies are caught close to the source.
 - once specs are passing and cross-browser consistency is sufficient, we can tag a release. At this point we run a "detect changes" test to make sure that all changes are intended and approved.
+
+
+Bookmarks
+----
+
+_TODO: filter though these and add some comments to each one_
+
+- [http://dalekjs.com/]()
+- [https://github.com/Huddle/PhantomCSS]()
+- [http://csste.st/]()
