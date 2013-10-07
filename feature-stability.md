@@ -21,7 +21,7 @@ What happens when we don't make the shift?
 Why doesn't it happen?
 ----
 
-- fear of breaking something.
+- fear of undoing/redoing something when you've just spent a lot of effort getting the details right.
 - management doesn't realise how essential it is (so we don't plan for the time required to do it).
 - requirements aren't locked down tight enough, so there's a lingering feeling that something might change.
 
