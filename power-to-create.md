@@ -1,10 +1,12 @@
 Power to create
 ====
 
-Listening to [Aral Balkan on Digital Feudalism](http://www.youtube.com/watch?v=G1QCBzQ0aNc) and [Amber Case on The Open Web](http://vimeo.com/77352414) remind me of when I first "got" the web and have wanted to be a part of building it ever since. Whatever else it may be, the web is an amazing publishing platform where anyone can create, interact and share. It's a maker's dream: no expensive licenses or regulating bodies, and raw materials are free.  All you need is a text editor and your imagination.
+_"Learn again how to post content and be creative and build stuff"_. These words rang in my ears after listening to [Amber Case on The Open Web](http://vimeo.com/77352414). It reminded me of the time when I first "got" the web, and ever since then I've wanted to be part of building it.
 
-Aral talks about how technology gives us superpowers, along with a call to take ownership. Failing to do this means that the more we become dependent on these powers, the less empowered we are by them.
+The web is a maker's dream: all you really need is a text editor and your imagination.  From there you are only a couple of steps away from a world of other people to collaborate and share experiences with. That's also part of what I love about working with a distributed team - it rings true with the web.
 
-To me the superpower granted us by web is the ability to create and share experiences. It's why I'm part of a team that strives to create a [culture of superheroes](http://x-team.com/2013/09/why-we-embrace-a-culture-of-superheroes/) and spend my days empowering the people we work with to create great experiences.
+And these days, it's never been easier to publish something.  You can twiddle your phone and moments later everyone in your network knows what you're thinking.  This is an amazing power, but how much do we take it for granted?  In a lot of ways we've traded ease of publishing and discovery for the independence our creative abilities. Aral Balkan articulates it so well when he speaks about [Digital Feudalism](http://www.youtube.com/watch?v=G1QCBzQ0aNc). Failure to own our creative ability leads to disempowerment and atrophy of those abilities. We might find our online experiences becoming more seamless and convenient but in turn they also become less powerful, and maybe less _you_.  If we truly are becoming cyborgs, let's make sure we keep the brain ;)
 
-But just like any good superhero plot the main stuggle happens within, as we learn to use the power for good. Anything good also be turned to cause great harm, and we have enough sci-fi movies to show us how technology out of control can get scary. Start small and simple in this discovery and remind yourself what is good, empowering and constructive. As Amber puts it, _"Learn again how to post content and be creative and build stuff"_.
+There's a reason why so many web developers are self-taught.  You imagined something, and then you went and figured out how to make it, with maybe a `View Source` along the way. I am eagerly looking forward to the next era of the web that follows this same spirit.
+
+Want to leave a comment on what you've read here? Hyperlink to it!
