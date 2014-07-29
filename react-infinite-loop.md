@@ -1,7 +1,7 @@
 Making an Infinte Loop in React
 ====
 
-Sometimes you can learn a lot about software by using it in the wrong way. The other day I stumbled upon an infinite loop in a React component, so maybe you can learn from my mistake.
+Sometimes you can learn a lot about software by using it in the wrong way. The other day I stumbled upon an infinite loop in a [React](http://facebook.github.io/react/) component, so maybe you can learn from my mistake.
 
 To show the behaviour in a simple way let's imagine a `ClickCounter` component that renders a button and shows how many times it's been clicked. We might start out with something like this:
 
