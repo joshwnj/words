@@ -18,7 +18,7 @@ Draft
 
 Finding the right people is not easy.
 
-I'm not even close to being an expert in this area, but over the last few months I've been involved in critiquing and interviewing dozens of developers for several positions. This has been a learning experience for me so I wanted to pass some of that on. In particular:
+I'm not even close to being an expert in this area, but over the last few months I've been involved in critiquing and interviewing dozens of developers for several positions. This has been a learning curve for me so I wanted to pass some of that on. During the experience a few things stuck with me, in particular:
 - use testing bias to your advantage
 - understand the core qualities you're looking for
 - make it fun
