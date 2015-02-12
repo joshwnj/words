@@ -77,8 +77,36 @@ You may well write javascript for years and never need to use syntax like this. 
 - `~` is a binary operation which inverts the value.
 - `&` is an operator that combines the two numbers in a certain way (binary `AND`).
 
+(If you want to read more about logic operations, go to [Mozilla MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_AND).)
+
 So putting that all together: we get the user's permission mask, invert it, and apply the mask to a full set of permissions. The value we end up with after applying the mask is what will be set on any files or directories we create.
 
+And to make everything even more clear, let's write one quick example using real numbers, keeping in mind that first 0 is only telling JS to treat number as an octal representation.
+
+```
+Initial mode:                   0777(8) = 111111111(2) // user r/w/x, group r/w/x, other r/w/x
+Process mask:                    022(8) = 000010010(2)
+Reversed process mask:          0755(8) = 111101101(2) // user r/w/x, group r/x, other r/x
+Initial mode AND reversed mask: 0755(8) = 111101101(2) // user can r/w/x, where group and other can only r/x
+```
+
+If AND operation returns exactly the same result as reversed process mask itself, why don't we just return the mask you ask? Because this way we can restrict default permissions. Let me show you this on the second example.
+
+```
+Initial mode:                   0666(8) = 110110110(2) // user r/w, group r/w, other r/w
+Process mask:                    022(8) = 000010010(2)
+Reversed process mask:          0755(8) = 111101101(2) // user r/w/x, group r/x, other r/x
+Initial mode AND reversed mask: 0644(8) = 110100100(2) // user r/w, group r, other r
+```
+
+Here we got 0664 instead of 0755 as our mode. Why is that?
+- We asked for `r/w` permissions for everyone
+- Process has `r/w/x` for user and `r/x` for gruop other
+- Process allow us to use `read` permissions that we asked for
+- Process disallow us to use `write` permissions as process itself doesn't have them
+- Process has one additional permission which is `execute` for everyone, but because we didn't ask for it, it's ignored
+
+If you got interested (remember, JavaScript is not the only thing in IT worth knowing!), you should definitelly read more about [Chmod](http://en.wikipedia.org/wiki/Chmod) and filesystem permissions.
 
 Making the directory
 ----
