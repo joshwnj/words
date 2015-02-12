@@ -86,17 +86,17 @@ And to make everything even more clear, let's write one quick example using real
 ```
 Initial mode:                   0777(8) = 111111111(2) // user r/w/x, group r/w/x, other r/w/x
 Process mask:                    022(8) = 000010010(2)
-Reversed process mask:          0755(8) = 111101101(2) // user r/w/x, group r/x, other r/x
-Initial mode AND reversed mask: 0755(8) = 111101101(2) // user can r/w/x, where group and other can only r/x
+Reversed process mask:          0755(8) = 111101101(2) // user r/w/x, group r/x,   other r/x
+Initial mode AND reversed mask: 0755(8) = 111101101(2) // user r/w/x, group r/x,   other r/x
 ```
 
 If AND operation returns exactly the same result as reversed process mask itself, why don't we just return the mask you ask? Because this way we can restrict default permissions. Let me show you this on the second example.
 
 ```
-Initial mode:                   0666(8) = 110110110(2) // user r/w, group r/w, other r/w
+Initial mode:                   0666(8) = 110110110(2) // user r/w,   group r/w, other r/w
 Process mask:                    022(8) = 000010010(2)
 Reversed process mask:          0755(8) = 111101101(2) // user r/w/x, group r/x, other r/x
-Initial mode AND reversed mask: 0644(8) = 110100100(2) // user r/w, group r, other r
+Initial mode AND reversed mask: 0644(8) = 110100100(2) // user r/w,   group r,   other r
 ```
 
 Here we got 0664 instead of 0755 as our mode. Why is that?
