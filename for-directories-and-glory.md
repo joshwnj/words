@@ -122,6 +122,7 @@ Homework
 
 We only got halfway through the module, but the rest of the code mostly deals with a [synchronous version of the same thing](https://github.com/substack/node-mkdirp/blob/0.5.0/index.js#L54-L97) (using `fs.mkdirSync` instead of `fs.mkdir`).  Take a look and see if you can recognise the same patterns that we saw earlier!
 
+Another great way to gain more insight into a 3rd-party module is to read some of the history.  Pick a spike on the [contributors graph](https://github.com/substack/node-mkdirp/graphs/contributors) and see what you can learn from commits made in that time.  You can also learn more about the design goals and particular challenges the authors faced by reading over past and present [issues](https://github.com/substack/node-mkdirp/issues) and [pull requests](https://github.com/substack/node-mkdirp/pulls).  And of course, if you get stumped on the meaning of a certain part of the code you can always ask :)
 
 Wrapping up
 ----
