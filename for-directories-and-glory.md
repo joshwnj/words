@@ -10,7 +10,7 @@ Starting out
 
 Get ready to dig into [substack's](https://github.com/substack) excellent [mkdirp](http://npmjs.org/mkdirp), a handy library for recursively creating directories (just like `mkdir -p` in linux). If you're like me, you've probably used this library many more times than you actually realize - it is a dependency of about 1000 other modules in npm!  So understanding modules like this will naturally lead us on to enlightenment elsewhere.
 
-If we look in [index.js](https://github.com/substack/node-mkdirp/blob/0.5.0/index.js) we're dealing with just under 100 lines. That feels pretty achieveable. Let's go.
+If we look in [index.js](https://github.com/substack/node-mkdirp/blob/0.5.0/index.js) we're dealing with just under 100 lines. That feels pretty achievable. Let's go.
 
 
 Aliasing the export
@@ -24,7 +24,7 @@ At first glance it looks a bit odd, but it's quite easy to understand if we read
 - <code>module.exports = mkdirP.mkdirp = <span style="background:yellow; font-weight: bold; padding: 0 5px;">mkdirP.mkdirP = mkdirP</span>;</code>: what we're doing here is adding a new property to the `mkdirP` function (remember that in javascript functions are objects). This new property is an alias back to the original function. Why would we do this? I can't speak for the author's intention here, but it could be to allow different forms of `require`.  For example, the alias means we can get the same function in 2 different ways: `require('path/to/module')` or `require('path/to/module').mkdirP`. Maybe someone would prefer the second form for being more explicit.
 - finally there is one more alias: `mkdirP.mkdirp = mkdirP.mkdirP = mkdirP`. This alias gives us the same function but with an all-lowercase name.
 
-So, first hill climbed. Onwards to the function itself.
+So, first hill climbed. Onward to the function itself.
 
 
 Function arguments and alternate signatures
@@ -73,7 +73,7 @@ mode = 0777 & (~process.umask());
 You may well write javascript for years and never need to use syntax like this. But it's good to be aware of it for the sake of understanding what's going on. To break it down:
 
 - we start with a number representing "full access" (`0777`. The `0` at the start tells javascript this is an octal number)
-- `process.umask()` gives us another number which relates to the filesystem permissions of the user (whichever user exectuted the `node` process).
+- `process.umask()` gives us another number which relates to the filesystem permissions of the user (whichever user executed the `node` process).
 - `~` is a binary operation which inverts the value.
 - `&` is an operator that combines the two numbers in a certain way (binary `AND`).
 
