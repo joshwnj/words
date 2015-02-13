@@ -58,7 +58,7 @@ Dependency injection
 
 The next interesting thing we'll talk about is on [line 16](https://github.com/substack/node-mkdirp/blob/0.5.0/index.js#L16): `var xfs = opts.fs || fs;`
 
-This allows us to substitute a custom `fs` object in place of the [core module](http://nodejs.org/api/fs.html). As long as we provide an object with equivalent functions for `mkdir`, `mkdirSync`, `stat` and `statSync` it will go ahead as normal. The most obvious use for this would be for testing (so that a real filesystem is not needed) but there's no reason why you couldn't also use this for some kind of virtual filesystem.
+This allows us to substitute a custom `fs` object in place of the [core module](http://nodejs.org/api/fs.html). As long as we provide an object with equivalent functions for `mkdir`, `mkdirSync`, `stat` and `statSync` it will go ahead as normal. The most obvious use for this would be for testing (so that a real filesystem is not needed) and we can see [mock-fs](https://www.npmjs.com/package/mock-fs) being used in some of the test-cases. But there's no reason why you couldn't also use this for some kind of virtual filesystem.
 
 
 Binary operations
@@ -78,6 +78,8 @@ You may well write javascript for years and never need to use syntax like this. 
 - `&` is an operator that combines the two numbers in a certain way (binary `AND`).
 
 So putting that all together: we get the user's permission mask, invert it, and apply the mask to a full set of permissions. The value we end up with after applying the mask is what will be set on any files or directories we create.
+
+_If you want to read more, Mozilla MDN has a good reference of [bitwise operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_AND). And there's also some good reading on wikipedia about [file system permissions](http://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation)._
 
 
 Making the directory
