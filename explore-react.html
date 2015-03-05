@@ -130,19 +130,72 @@ h1.sticky small {
   color: #333;
 }
 </style></head><body><div class="content"><div class="topic" data-topic-id="headingId"><h1 id="explore-react" class="heading">Explore React</h1><div class="topic-content"><p>Ever try to make sense of a huge codebase? It doesn&#39;t take very long before the vertigo kicks in.  When looking at something like React, what we see is the cumulative result of years of effort from hundreds of very bright people.  So how do we mere mortals even begin to understand all of the careful decisions that have gone into it?  Today might be the day you take the first couple of steps.</p>
-<p>There are so many things one could talk about, and much has already been <a href="#">written about the concepts behind React&#39;s architecture</a>.</p>
-<h2 class="heading" id="explore-react:hello-world" data-topic="Explore React">Hello World</h2><p>Let&#39;s start with the most simple of examples, the Hello World.</p>
-<p>This looks straightforward. We define our element, create an instance of it, and render it to a DOM node.</p>
-<p>We&#39;ll begin with the <code>React.render</code> function:</p>
+<p>It&#39;s helpful to understand the basic concepts behind React, and and much has already been <a href="#">written about the concepts behind React&#39;s architecture</a>. I encourage you to read up if you&#39;re interested, but it&#39;s not essential for our exploration today.</p>
+<h2 class="heading" id="explore-react:hello-world" data-topic="Explore React">Hello World</h2><p>Let&#39;s start with the most simple of examples, the Hello World. If you&#39;ve done any tutorials then something like this should look familiar:</p>
+<pre><code class="undefinedjs">React.render(
+  React.createElement(&#39;h1&#39;, null, &#39;Hello, world!&#39;),
+  document.getElementById(&#39;example&#39;)
+);
+</code></pre>
+<p>This looks straightforward. We create an <code>h1</code> element and render it to the DOM node with ID of <code>example</code>.</p>
+<p>Now, if our only goal was to get our message onto the screen we could just set some innerHTML and we&#39;d be done. With React, there&#39;s a little more going on because it&#39;s not really trying to solve the problem of rendering content once. When dealing with content that changes in response to signals from a user or a server, the innerHTML approach is not so simple anymore. We&#39;ll be taking a look inside the render function to see some of the ways it tries to solve this problem.</p>
+<p>So let&#39;s start with <code>React.render</code> (you can use the <em>&quot;Source&quot;</em> link below to open the entire file if you&#39;d like to see the context):</p>
 <div class="code-ref" data-lines="432,432"><pre><code class="lang lang-js">  render: function(nextElement, container, callback) {
-</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L432">src/browser/ui/ReactMount.js:432</a></p></div><ol>
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L432">src/browser/ui/ReactMount.js:432</a></p></div><p>A rough overview of what we see in this function:</p>
+<ol>
 <li><a href="#elements:check-if-an-object-is-a-valid-element">Make sure we&#39;re rendering a valid element</a></li>
 <li><a href="#explore-react:replace-it-or-reuse-it-">Now work out whether to replace or reuse the previous element</a></li>
-<li><a href="#explore-react:render-the-new-component">Finally render the new component</a></li>
+<li><a href="#explore-react:render-a-new-component">Finally render a new component</a></li>
 </ol>
+<p>You may also want to read about:</p>
+<ul>
+<li><a class="wiki-link" href="#the-invariant-function" data-topic="The invariant function" data-subheading="undefined">The invariant function</a></li>
+<li><a class="wiki-link" href="#dev-environment" data-topic="Dev Environment" data-subheading="undefined">Dev Environment</a></li>
+</ul>
+<h2 class="heading" id="explore-react:make-sure-we-39-re-rendering-a-valid-element" data-topic="Explore React">Make sure we&#39;re rendering a valid element</h2><p>Coming soon...</p>
+<p>Some more notes on <a class="wiki-link" href="#elements" data-topic="Elements" data-subheading="undefined">Elements</a></p>
 <h2 class="heading" id="explore-react:replace-it-or-reuse-it-" data-topic="Explore React">Replace it or reuse it?</h2><p>Coming soon...</p>
-<h2 class="heading" id="explore-react:render-the-new-component" data-topic="Explore React">Render the new component</h2><p>Coming soon...</p>
-</div></div>
+<h2 class="heading" id="explore-react:render-a-new-component" data-topic="Explore React">Render a new component</h2><p>Finally we&#39;ve determined that there&#39;s no existing component, and we want to render a new one. We call the <code>_renderNewRootComponent</code> function:</p>
+<div class="code-ref" data-lines="492,496"><pre><code class="lang lang-js">    var component = ReactMount._renderNewRootComponent(
+      nextElement,
+      container,
+      shouldReuseMarkup
+    ).getPublicInstance();
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L492-L496">src/browser/ui/ReactMount.js:492,496</a></p></div><p>and we can see the function body here:</p>
+<div class="code-ref" data-lines="377,381"><pre><code class="lang lang-js">  _renderNewRootComponent: function(
+    nextElement,
+    container,
+    shouldReuseMarkup
+  ) {
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L377-L381">src/browser/ui/ReactMount.js:377,381</a></p></div><ul>
+<li>TODO: warn against nested update:</li>
+</ul>
+<div class="code-ref" data-lines="385,391"><pre><code class="lang lang-js">    warning(
+      ReactCurrentOwner.current == null,
+      &#39;_renderNewRootComponent(): Render methods should be a pure function &#39; +
+      &#39;of props and state; triggering nested component updates from &#39; +
+      &#39;render is not allowed. If necessary, trigger nested updates in &#39; +
+      &#39;componentDidUpdate.&#39;
+    );
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L385-L391">src/browser/ui/ReactMount.js:385,391</a></p></div><ul>
+<li>TODO: instantiate component and register it. This gives us an ID that is used to refer to the component internally.</li>
+</ul>
+<div class="code-ref" data-lines="393,397"><pre><code class="lang lang-js">    var componentInstance = instantiateReactComponent(nextElement, null);
+    var reactRootID = ReactMount._registerComponent(
+      componentInstance,
+      container
+    );
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L393-L397">src/browser/ui/ReactMount.js:393,397</a></p></div><ul>
+<li>TODO: batch the update</li>
+</ul>
+<div class="code-ref" data-lines="403,409"><pre><code class="lang lang-js">    ReactUpdates.batchedUpdates(
+      batchedMountComponentIntoNode,
+      componentInstance,
+      reactRootID,
+      container,
+      shouldReuseMarkup
+    );
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L403-L409">src/browser/ui/ReactMount.js:403,409</a></p></div></div></div>
 <div class="topic" data-topic-id="headingId"><h1 id="elements" class="heading">Elements</h1><div class="topic-content"><p>React keeps the definition of an &quot;element&quot; very simple. Rather than trying to abstract the general behaviour of every possible kind of element, a <code>ReactElement</code> is just a javascript object which follows a certain strucutre.</p>
 <h2 class="heading" id="elements:check-if-an-object-is-a-valid-element" data-topic="Elements">Check if an object is a valid element</h2><p>How does React know if it is dealing with an element or some other type of object? Often when faced with this question you might reach for <code>instanceof</code> but a decision was made here to use the more flexible <a href="https://en.wikipedia.org/wiki/Duck_typing">Duck Typing</a> approach. There&#39;s a reference to this in the comments:</p>
 <div class="code-ref" data-lines="443,443"><pre><code class="lang lang-js">        // Check if it quacks like an element
@@ -156,7 +209,27 @@ h1.sticky small {
 ReactElement.prototype = {
   _isReactElement: true
 };
-</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/classic/element/ReactElement.js#L139-L143">src/classic/element/ReactElement.js:139,143</a></p></div></div></div></div><script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/classic/element/ReactElement.js#L139-L143">src/classic/element/ReactElement.js:139,143</a></p></div></div></div>
+<div class="topic" data-topic-id="headingId"><h1 id="registering-a-component" class="heading">Registering a component</h1><div class="topic-content"><ul>
+<li>TODO: monitor scrolling (so that React can handle this internally):</li>
+</ul>
+<div class="code-ref" data-lines="363,363"><pre><code class="lang lang-js">    ReactBrowserEventEmitter.ensureScrollValueMonitoring();
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L363">src/browser/ui/ReactMount.js:363</a></p></div><ul>
+<li>TODO: register the container</li>
+</ul>
+<div class="code-ref" data-lines="365,365"><pre><code class="lang lang-js">    var reactRootID = ReactMount.registerContainer(container);
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L365">src/browser/ui/ReactMount.js:365</a></p></div><ul>
+<li>store a reference to the component instance by ID:</li>
+</ul>
+<div class="code-ref" data-lines="366,366"><pre><code class="lang lang-js">    instancesByReactRootID[reactRootID] = nextComponent;
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L366">src/browser/ui/ReactMount.js:366</a></p></div></div></div>
+<div class="topic" data-topic-id="headingId"><h1 id="react-ids" class="heading">React IDs</h1><div class="topic-content"><ul>
+<li><p>TODO: how are IDs generated?</p>
+</li>
+<li><p>TOOD: how are they used?</p>
+</li>
+</ul>
+</div></div></div><script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 function dedupe (acc, item) {
   if (acc.indexOf(item) === -1) { acc.push(item); }
   return acc;
