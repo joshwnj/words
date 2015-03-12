@@ -133,8 +133,8 @@ h1.sticky small {
   line-height: 0.5;
   color: #333;
 }
-</style></head><body><div class="content"><div class="topic" data-topic-id="headingId"><h1 id="explore-react" class="heading">Explore React</h1><div class="topic-content"><p>Ever try to make sense of a huge codebase? It doesn&#39;t take very long before the vertigo kicks in.  When looking at something like React, what we see is the cumulative result of years of effort from hundreds of very bright people.  So how do we mere mortals even begin to understand all of the careful decisions that have gone into it?  Today might be the day you take the first couple of steps.</p>
-<p>It&#39;s helpful to understand the basic concepts behind React, and and much has already been <a href="#">written about the concepts behind React&#39;s architecture</a>. I encourage you to read up if you&#39;re interested, but it&#39;s not essential for our exploration today.</p>
+</style></head><body><div class="content"><div class="topic" data-topic-id="headingId"><h1 id="explore-react" class="heading">Explore React</h1><div class="topic-content"><p>Ever try navigating your way around a huge codebase? It doesn&#39;t take very long before the vertigo kicks in.  When looking at something like React, what we see is the cumulative result of years of effort from hundreds of very bright people.  So how do we mere mortals even begin to understand all of the careful decisions that have gone into it?  Today might be the day you take the first couple of steps.</p>
+<p>It&#39;s helpful to understand the basic concepts behind React, and and much has already been written about <a href="#">the concepts behind React&#39;s architecture</a>. I encourage you to read up if you&#39;re interested, but it&#39;s not essential for our exploration today.</p>
 <h2 class="heading" id="explore-react:hello-world" data-topic="Explore React">Hello World</h2><p>Let&#39;s start with the most simple of examples, the Hello World. If you&#39;ve done any tutorials then something like this should look familiar:</p>
 <pre><code class="lang lang-js">React.render(
   React.createElement(&#39;h1&#39;, null, &#39;Hello, world!&#39;),
@@ -143,23 +143,26 @@ h1.sticky small {
 </code></pre>
 <p>Not a lot of action here on the surface. We create an <code>h1</code> element and render it to the DOM node with ID of <code>example</code>.</p>
 <p>Now, if our only goal was to get our message onto the screen we could just set some innerHTML and we&#39;d be done. With React, there&#39;s a little more involved because it&#39;s not really trying to solve the problem of rendering content once. When dealing with content that changes in response to signals from a user or a server, the innerHTML approach soon becomes painful to maintain. We&#39;ll be taking a look inside the render function to see some of the ways it tries to solve this problem.</p>
-<p>So let&#39;s start with <code>React.render</code> (you can use the <em>&quot;Source&quot;</em> link below to open the entire file if you&#39;d like to see it in context):</p>
+</div></div>
+<div class="topic" data-topic-id="headingId"><h1 id="react-render" class="heading">React.render</h1><div class="topic-content"><p>Let&#39;s take a step into <code>React.render</code> (you can use the <em>&quot;Source&quot;</em> link below to open the entire file if you&#39;d like to see it in context):</p>
 <div class="code-ref" data-lines="432,432"><pre><code class="lang lang-js">  render: function(nextElement, container, callback) {
-</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L432">src/browser/ui/ReactMount.js:432</a></p></div><p>A rough overview of what we see in this function:</p>
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/browser/ui/ReactMount.js#L432">src/browser/ui/ReactMount.js:432</a></p></div><p>If you recall our <a class="wiki-link" href="#explore-react:hello-world" data-topic="Explore React" data-subheading="Hello World">Explore React&rarr;Hello World</a> example, <code>nextElement</code> is the <code>h1</code> we created, <code>container</code> is the <code>#example</code> DOM node, and we have omitted the optional <code>callback</code> parameter.</p>
+<p>At a high level we can describe this function in three steps:</p>
 <ol>
-<li><a href="#elements:check-if-an-object-is-a-valid-element">Make sure we&#39;re rendering a valid element</a></li>
-<li><a href="#explore-react:replace-it-or-reuse-it-">Work out whether to replace or reuse the previous element</a></li>
-<li><a href="#explore-react:render-a-new-component">Finally render a new component</a></li>
+<li><a href="#react-render:make-sure-we-39-re-rendering-a-valid-element">Make sure we&#39;re rendering a valid element</a></li>
+<li><a href="#react-render:replace-it-or-reuse-it-">Work out whether to replace or reuse the previous element</a></li>
+<li><a href="#react-render:render-a-new-component">Finally render a new component</a></li>
 </ol>
+<p>Before we go on, it&#39;s interesting to note the use of the argument name <code>nextElement</code>. At first glance this might be confusing: why is it called &quot;next element&quot; and not just &quot;element&quot;? As mentioned earlier, React is not simply trying to render content to the page. Its main concern is in efficiently rendering <em>changing content</em>.  In that light the name <code>nextElement</code> makes more sense. When our state changes, rather than updating the DOM manually ourselves we simply create the &quot;next element&quot; and pass it to React to work out the best way to apply those changes. We&#39;ll also see later on how <code>nextElement</code> has a counterpart of <code>prevElement</code> (<a class="wiki-link" href="#react-render:replace-it-or-reuse-it-" data-topic="React.render" data-subheading="Replace it or reuse it?">React.render&rarr;Replace it or reuse it?</a>).</p>
 <p>As we go we&#39;ll also see examples of:</p>
 <ul>
 <li><a class="wiki-link" href="#the-invariant-function" data-topic="The invariant function" data-subheading="undefined">The invariant function</a></li>
 <li><a class="wiki-link" href="#dev-environment" data-topic="Dev Environment" data-subheading="undefined">Dev Environment</a></li>
 </ul>
-<h2 class="heading" id="explore-react:make-sure-we-39-re-rendering-a-valid-element" data-topic="Explore React">Make sure we&#39;re rendering a valid element</h2><p>Coming soon...</p>
+<h2 class="heading" id="react-render:make-sure-we-39-re-rendering-a-valid-element" data-topic="React.render">Make sure we&#39;re rendering a valid element</h2><p>The first thing the <code>render</code> function does is make sure we have a valid element. Placing this check at the entry-point follows the same idea as someone who checks you&#39;re passport at a border crossing. Once we have verified that <code>nextElement</code> is a valid React element we can freely make assumptions on what to expect from it in all of the following function calls, without having to re-check each time.</p>
 <p>Some more notes on <a class="wiki-link" href="#elements" data-topic="Elements" data-subheading="undefined">Elements</a></p>
-<h2 class="heading" id="explore-react:replace-it-or-reuse-it-" data-topic="Explore React">Replace it or reuse it?</h2><p>Coming soon...</p>
-<h2 class="heading" id="explore-react:render-a-new-component" data-topic="Explore React">Render a new component</h2><p>Finally we&#39;ve determined that there&#39;s no existing component, and we want to render a new one. We call the <code>_renderNewRootComponent</code> function:</p>
+<h2 class="heading" id="react-render:replace-it-or-reuse-it-" data-topic="React.render">Replace it or reuse it?</h2><p>Coming soon...</p>
+<h2 class="heading" id="react-render:render-a-new-component" data-topic="React.render">Render a new component</h2><p>Finally we&#39;ve determined that there&#39;s no existing component, and we want to render a new one. We call the <code>_renderNewRootComponent</code> function:</p>
 <div class="code-ref" data-lines="492,496"><pre><code class="lang lang-js">    var component = ReactMount._renderNewRootComponent(
       nextElement,
       container,
@@ -231,6 +234,29 @@ ReactElement.prototype = {
 <li><p>TOOD: how are they used?</p>
 </li>
 </ul>
+</div></div>
+<div class="topic" data-topic-id="headingId"><h1 id="the-invariant-function" class="heading">The invariant function</h1><div class="topic-content"><div class="code-ref" data-lines="14,25"><pre><code class="lang lang-js">/<em>*
+ </em> Use invariant() to assert state which your program assumes to be true.
+ <em>
+ </em> Provide sprintf-style format (only %s is supported) and arguments
+ <em> to provide information about what broke and what you were
+ </em> expecting.
+ <em>
+ </em> The invariant message will be stripped in production, but the invariant
+ <em> will remain to ensure logic does not differ in production.
+ </em>/
+
+var invariant = function(condition, format, a, b, c, d, e, f) {
+</code></pre><p>source: <a target="_blank" href="https://github.com/facebook/react/blob/v0.13.0-rc1//src/vendor/core/invariant.js#L14-L25">src/vendor/core/invariant.js:14,25</a></p></div><p>You might wonder why the invariant function uses those <code>a, b, c, d, e, f</code> arguments. These are used to create the error message. <code>format</code> is a string template, and <code>a</code> to <code>f</code> are substituted any place <code>format</code> contains the string <code>%s</code>.</p>
+<p>But can&#39;t we use <code>arguments</code> if we need to support a varying number of arguments to our function? Yes we can, but there is some performance overhead. Since React uses <code>invariant</code> quite often, and in some performance-critical code, even a little gain will be worthwhile. A quick google showed a <a href="http://jsperf.com/invariant-with-and-without-explicit-parameters">jsperf experiment on this topic</a> if you&#39;re interested in some numbers.</p>
+<ul>
+<li><p>TODO: stripping out the message for production</p>
+</li>
+<li><p>TODO: <code>error.framesToPop</code></p>
+</li>
+</ul>
+</div></div>
+<div class="topic" data-topic-id="headingId"><h1 id="dev-environment" class="heading">Dev Environment</h1><div class="topic-content"><p>Coming soon...</p>
 </div></div></div><script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 function dedupe (acc, item) {
   if (acc.indexOf(item) === -1) { acc.push(item); }
