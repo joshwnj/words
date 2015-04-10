@@ -9,7 +9,7 @@ _Photo source:_ <http://pixelperfectdigital.com/samples/ODY1YzczNWFhODVlMw==/NDV
 
 This is all well and good for your average user. But as a programmer I appreciate tools that are programmable. That's one of the big things that has kept me on emacs over the years.
 
-There was a time way back when I embraced my destiny as a web developer. Regardless of how limited the web platform seeemd compared to native applications, there was something whispering softly to the creative place in my heart. When I saw how to open up a console and edit the code on the page as it ran, I was hooked - this was my "View Source" moment. Looking back, my enjoyment of using emacs stems from a similar place.
+There was a time way back when I embraced my destiny as a web developer. Regardless of how limited the web platform seemed compared to native applications, there was something whispering softly to the creative place in my heart. When I saw how to open up a console and edit the code on the page as it ran, I was hooked - this was my "View Source" moment. Looking back, my enjoyment of using emacs stems from a similar place.
 
 Now before going further, a disclaimer: I am not by any stretch a master emacs user or lisper. I don't gpg-encrypt my emails, and I sometimes (regrettably) use non-free software. However I know enough emacs to get by, and what I hope to show is that even this small amount has led to a very satisfying experience of what a text editor can be.
 
