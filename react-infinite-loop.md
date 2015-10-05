@@ -5,7 +5,7 @@ Sometimes you can learn a lot about software by using it in the wrong way. The o
 
 To show the behaviour in a simple way let's imagine a `ClickCounter` component that renders a button and shows how many times it's been clicked. We might start out with something like this:
 
-```
+```jsx
 var react = require('react');
 
 var ClickCounter = react.createClass({
@@ -34,7 +34,7 @@ var ClickCounter = react.createClass({
 
 Now, let's say there's another requirement: the component needs to display the time of the most recent change in state. We start by adding the `lastStateChange` field:
 
-```
+```jsx
 getInitialState: function () {
     return {
         numClicks: 0,
@@ -45,13 +45,13 @@ getInitialState: function () {
 
 and add a new element to the `render()` function:
 
-```
+```jsx
 <p>The state was last changed at {this.state.lastStateChange.toString()}</p>
 ```
 
-The final piece is to update the value of `lastStateChange` whenever the component's state changes. All React components hav a useful function `componentDidUpdate` that is called immediately after any state change. We could use that, right?
+The final piece is to update the value of `lastStateChange` whenever the component's state changes. All React components have a useful function `componentDidUpdate` that is called immediately after any state change. We could use that, right?
 
-```
+```jsx
 componentDidUpdate: function () {
     this.setState({
         lastStateChange: new Date()
@@ -63,7 +63,7 @@ Nope! When you click the button you'll see `Uncaught RangeError: Maximum call st
 
 Let's see what happens if we use a `setTimeout` to bypass recursion:
 
-```
+```jsx
 componentDidUpdate: function () {
     var self = this;
     setTimeout(function () {
