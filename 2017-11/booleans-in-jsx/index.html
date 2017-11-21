@@ -94,26 +94,18 @@ gtag('config', 'UA-109231430-1');
     <div class="content">
       <p class="standout">
         <span>
-        tip: have some things set aside that you can do even when you're weary and uninspired. Don't waste your high-brain time on these.
+        boolean flags in jsx
         </span>
       </p>
       ~
-      <p>
-        If I had to articulate the difference between a good day's work and a bad day's work in a single word, it would be <em>"clarity"</em>. I would happily trade 1 hour of clarity for a day of feeling mentally exhausted or distracted.
-      </p>
-      <p>
-        But these days do happen. Have one night of interrupted sleep and you bounce back, but string a few of them together and you'll notice.
-      </p>
-      <p>
-        On these days it's counterproductive to try and do the kinds of things that require a high level of mental clarity. And conversely, if there are things to be done which are more mechanical, I don't want to waste a good brain on them.
-      </p>
-      <p>
-        So I find it helpful to have 2 lists for "high" and "low". And use them honestly. On a low-day, don't slog through on account of feeling guilty. Ask yourself: <em>what can I do today which will free up my time for the next good day?</em>. 
-      </p>
 
-      <p>
-        Maybe as simple as clearing out some emails or github issues you've been putting off. Maybe a good time to recap on where everything is at, and attempt to summarize it. You might not be able to move things forward today, but you can reduce some of tomorrow's friction.
-      </p>
+      <p>In jsx you might write a component like this:</p>
+      <pre><code class="hljs language-jsx">&lt;MyComponent theFlag={<span class="hljs-literal">true</span>} /&gt;</code></pre>
+      <p>But a better way to pass a boolean flag is to just add the prop name, with no value:</p>
+      <pre><code class="hljs language-jsx">&lt;MyComponent theFlag /&gt;</code></pre>
+      <p>And if you want the value to be false, leave it out:</p>
+      <pre><code class="hljs language-jsx">&lt;MyComponent /&gt;</code></pre>
+
     </div>
     
     <footer>
@@ -122,7 +114,7 @@ gtag('config', 'UA-109231430-1');
         <div class="avatar alchemix"></div>
         <div class="author-info">
           <div>Josh Johnston</div>
-          <div>Oct 3, 2017</div>
+          <div>Nov 21, 2017</div>
         </div>
       </div>
     </footer>
